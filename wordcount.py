@@ -65,7 +65,6 @@ def create_word_dict(filename):
 def print_words(filename):
     """Prints one per line '<word> : <count>' sorted by word for the given file."""
     words_list = create_word_dict(filename)
-    # print words_list
 
     for item in words_list:
         print item + ": " + str(words_list.get(item))
@@ -90,9 +89,6 @@ def print_top(filename):
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
 def main(args):
-
-    # print print_words("books/alice.txt")
-    print print_top("books/alice.txt")
 
     if len(args) != 2:
         print('usage: python wordcount.py {--count | --topcount} file')
