@@ -41,33 +41,59 @@ words as keys, and their counts as values.
 """
 
 import sys
+import argparse
+from collections import OrderedDict
 
 # Your name, plus anyone who helped you with this assignment
 # Give credit where credit is due.
-__author__ = "???"
+__author__ = "Christian Rojas"
 
 
 def create_word_dict(filename):
     """Returns a word/count dict for this filename."""
-    # Your code here
-    return
+    words = {}
+    with open(filename, "r") as f:
+        words_list = f.read().lower().split()
+        for w in words_list:
+            if w in words:
+                words[w] += 1
+            else:
+                words[w] = 1
+    return words
 
 
 def print_words(filename):
     """Prints one per line '<word> : <count>' sorted by word for the given file."""
-    # Your code here
-    return
+    words_list = create_word_dict(filename)
+    # print words_list
+
+    for item in words_list:
+        print item + ": " + str(words_list.get(item))
 
 
 def print_top(filename):
     """Prints the top count listing for the given file."""
-    # Your code here
-    return
+    words_list = create_word_dict(filename)
+    commons = OrderedDict(sorted(words_list.items(), key=lambda x: x[1], reverse=True))
 
+    for i, item in enumerate(commons):
+        if i < 20:
+            print item + ": " + str(commons.get(item))
+    
+
+
+
+    
+
+    
 
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
 def main(args):
+
+    # print print_words("books/alice.txt")
+    print print_top("books/alice.txt")
+
     if len(args) != 2:
         print('usage: python wordcount.py {--count | --topcount} file')
         sys.exit(1)
